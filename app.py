@@ -3,7 +3,6 @@ st.set_page_config(page_title=' 🙂 ☹ Analysis',page_icon=" ")
 
 # NLP Pkgs
 import nltk
-nltk.data.path.append('./nltk_data/')
 from textblob import TextBlob
 import pandas as pd 
 # Emoji
