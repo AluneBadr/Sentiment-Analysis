@@ -149,17 +149,17 @@ def NER():
         #st.write(HTML_WRAPPER.format(html),unsafe_allow_html=True)
 
 def NER_from_url():
-    session_state = SessionState.get(name="", Analyze=False)
+    ss = SessionState.get(name="", Analyze=False)
     st.subheader("Named Entity Recog with Spacy")
-    session_state.raw_url = st.text_input("Enter URL Here","https://en.wikipedia.org/wiki/COVID-19_pandemic")
+    ss.raw_url = st.text_input("Enter URL Here","https://en.wikipedia.org/wiki/Donald_Trump")
     #text_preview_length = st.slider("Length to Preview",50,100)
     Analyze = st.button("Analyze", key=200)
     if Analyze:
-        session_state.Analyze = True
-    if session_state.Analyze:
-        if session_state.raw_url != "Type here (English)":
+        ss.Analyze = True
+    if ss.Analyze:
+        if ss.raw_url != "Type here (English)":
             #st.write(process.get_stopwords())
-            raw_text = get_text(session_state.raw_url)
+            raw_text = get_text(ss.raw_url)
             try:
                 raw_text = raw_text[:1000]
             except:
