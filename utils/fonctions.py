@@ -58,13 +58,13 @@ def get_text(raw_url):
 
 def expresion(result):
 	if  0 < result <= 0.35:
-		custom_emoji = ':smile:'
+		custom_emoji = '😊'
 		st.write(emoji.emojize(custom_emoji,use_aliases=True))
 	elif  0.35 < result <= 0.65:
-		custom_emoji = ':smile:'*2
+		custom_emoji = '😊'*2
 		st.write(emoji.emojize(custom_emoji,use_aliases=True))
 	elif  0.65 < result:
-		custom_emoji = ':smile:'*3
+		custom_emoji = '😊'*3
 		st.write(emoji.emojize(custom_emoji,use_aliases=True))
 	elif  -0.35 <= result < 0.0:
 		custom_emoji = ':disappointed:'
