@@ -7,7 +7,7 @@ from string import punctuation
 import pandas as pd
 
 urls = [
-    #"https://raw.githubusercontent.com/stopwords-iso/stopwords-fr/master/stopwords-fr.txt",
+    "https://raw.githubusercontent.com/stopwords-iso/stopwords-fr/master/stopwords-fr.txt",
     "https://raw.githubusercontent.com/stopwords-iso/stopwords-en/master/stopwords-en.txt"
 ]
 
@@ -70,40 +70,8 @@ def clean_text(text):
 
 
 
-
-
-
-def clean_tokens(tokens_with_entities):
-    tokens = [token.lower() for (token, entity) in tokens_with_entities if entity == ""]     
-    tokens = [token for token in tokens if token.strip() != ""]
-    tokens = [token for token in tokens if token not in punctuation]
-    tokens = [token for token in tokens if len(token) > 1]
-    tokens = [token for token in tokens if len(token) < 20]
-    tokens = [token for token in tokens if not token.isdigit()]
-    tokens = [token for token in tokens if not token.startswith("http")]
-    tokens = [token for token in tokens if re.search(
-        r"[^a-zA-Z_éàèùâêîôûçëïü']+", token) is None]
-    tokens = [token for token in tokens if not token.endswith("'")]
-    tokens = [token for token in tokens if token.strip() not in STOPWORDS]
-    return tokens
-
-
-
-def cleanHtml(sentence):
-    cleanr = re.compile('<.*?>')
-    cleantext = re.sub(cleanr, ' ', str(sentence))
-    cleantext = re.sub('-', ' ', cleantext)
-    cleantext = re.sub('\*', '', cleantext) 
-    cleantext = re.sub('\xa0', ' ', cleantext)
-
-    return cleantext
-
-
-    
 #re.match("(.*?):",string).group()
 
 
 
 #re.search(r"Message:\s(.*)", mes).group(1)
-
-

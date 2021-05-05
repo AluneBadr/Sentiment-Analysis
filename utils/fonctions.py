@@ -4,6 +4,42 @@ import emoji
 from pathlib import Path
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+import spacy
+
+def analyze_text(doc, anonymize, selected_entities):
+
+    tokens = []
+    for token in doc:
+        if (token.ent_type_ == "PERSON") & ("PER" in selected_entities):
+            tokens.append((token.text, "Person", "#faa"))
+        elif (token.ent_type_ in ["GPE", "LOC"]) & ("LOC" in selected_entities):
+            tokens.append((token.text, "Location", "#fda"))
+        elif (token.ent_type_ in ["ORG"]) & ("ORG" in selected_entities):
+            tokens.append((token.text, "Organization", "#afa"))
+        else:
+            tokens.append(" " + token.text + " ")
+
+    if anonymize:
+        anonymized_tokens = []
+        for token in tokens:
+            if type(token) == tuple:
+                token = ("X" * len(token[0]), token[1], token[2])
+
+            anonymized_tokens.append(token)
+        return anonymized_tokens
+
+    else:
+        return tokens
+
+
+def load_models():
+    print("loading models")
+    fr_model = spacy.load("./models/fr", disable=["parser", "tagger"])
+    en_model = spacy.load("./models/en", disable=["parser", "tagger"])
+    models = {"fr": fr_model, "en": en_model}
+    return models
+
+
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -13,7 +49,7 @@ def img_to_bytes(img_path):
     img_bytes = Path(img_path).read_bytes()
     encoded = base64.b64encode(img_bytes).decode()
     return encoded
-	
+
 def get_text(raw_url):
 	page = urlopen(raw_url)
 	soup = BeautifulSoup(page)

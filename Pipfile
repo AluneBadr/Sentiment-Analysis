@@ -12,6 +12,8 @@ emoji = "*"
 bs4 = "*"
 plotly = "*"
 nltk= "*"
+st-annotated-text = "*"
+spacy = "*"
 
 [dev-packages]
 
