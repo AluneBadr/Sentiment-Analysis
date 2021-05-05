@@ -18,7 +18,7 @@ def main():
 
 	st.title("Sentiment and NER Analysis App")
 
-	activities = ["Sentiment Analysis","Sentiment Analysis on URL","NER","NER from URL","About"]
+	activities = ["NER from URL","NER","Sentiment Analysis","Sentiment Analysis on URL","About"]
 	choice = st.sidebar.selectbox("Choice",activities)
 
 	if choice == 'Sentiment Analysis':
